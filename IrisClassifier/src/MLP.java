@@ -19,6 +19,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class MLP extends Individual{
 	protected static int numGenes=4;
@@ -71,6 +72,7 @@ public class MLP extends Individual{
 		int testeTotal=0;
 		for (int i=0;i<10;i++)
 		{
+			data.randomize(new Random());
 			//int acertosCamada=0;
 			int j=0;
 			Instances trainSet=data.trainCV(10,i);
@@ -100,15 +102,14 @@ public class MLP extends Individual{
 		if (this.aptitude<0)
 		{
 			try {
-				return this.classify();
+				this.aptitude=this.classify();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return 0f;
 		}
-		else
-			return this.aptitude;
+		return this.aptitude;
 	}
 	/*public static void main(String[] args) {
 		try {

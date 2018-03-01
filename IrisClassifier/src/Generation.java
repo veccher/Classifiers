@@ -89,7 +89,7 @@ public class Generation {
 	{
 		System.out.println("Printing Generation Elite:");
 		for (Integer i=0;i<generationSize;i++) {
-			System.out.println(i.toString() +":Genes: " + this.population.get(i).getGenes().isEmpty()+ //this.population.get(i).getGenes().get(1).toString()+ this.population.get(i).getGenes().get(2).toString()+ this.population.get(i).getGenes().get(3).toString() +
+			System.out.println(i.toString() +":Genes: " + this.population.get(i).getGenes()+ //this.population.get(i).getGenes().get(1).toString()+ this.population.get(i).getGenes().get(2).toString()+ this.population.get(i).getGenes().get(3).toString() +
 					" Aptitude:" + this.population.get(i).getAptitude().toString());
 		}
 	}

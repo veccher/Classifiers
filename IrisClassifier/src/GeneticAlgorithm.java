@@ -10,7 +10,7 @@ public class GeneticAlgorithm {
 		Generation next;
 		System.out.println("generation " + generationNumber.toString() + " trained");
 		current.printElite();
-		while (input==1){
+		while (input==1 || input=='1'){
 			next=new Generation(current);
 			System.out.println("generation " + generationNumber.toString() + " trained");
 			next.printElite();
