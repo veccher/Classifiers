@@ -8,11 +8,26 @@ public class Generation {
 	private Float generationAptitude;
 	
 	//sums the total aptitude for every Individual in the population,
-	private void calcGenAptitude() {
+	private synchronized void calcGenAptitude() {
 		this.generationAptitude=0f;
+		while (!isAptitudesFinished())
+		{
+			try {
+	            wait();
+	         } catch (InterruptedException e) {
+	            e.printStackTrace();
+	         }
+		}
 		for(Individual i:population) {
 			this.generationAptitude+=i.getAptitude();
 		}
+	}
+	private boolean isAptitudesFinished()
+	{
+		for(Individual i:population)
+			if (i.getAptitude()==-1)
+				return false;
+		return true;
 	}
 	//returns a individual, each individual get a chance proportional to it's aptitude.
 	private Individual selectIndividual(Generation gen) throws Exception{
@@ -87,11 +102,16 @@ public class Generation {
 	//prints genes and aptitude from elite.
 	public void printElite()
 	{
+		this.population.sort(null);
 		System.out.println("Printing Generation Elite:");
 		for (Integer i=0;i<generationSize;i++) {
 			System.out.println(i.toString() +":Genes: " + this.population.get(i).getGenes()+ //this.population.get(i).getGenes().get(1).toString()+ this.population.get(i).getGenes().get(2).toString()+ this.population.get(i).getGenes().get(3).toString() +
 					" Aptitude:" + this.population.get(i).getAptitude().toString());
 		}
+	}
+	public Individual getBestIndividual(){
+		this.population.sort(null);
+		return this.population.get(0);
 	}
 	
 }
